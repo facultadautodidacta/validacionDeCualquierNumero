@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Validar cualquier numero</title>
+
+	<script src="jquery-3.2.1.min.js"></script>
+	<script src="jqueryNumeric/jquery.numeric.js"></script>
+</head>
+<body>
+	<form>
+		<label>Agrega numero de producto</label>
+		<p></p>
+		<input type="text" name="" class="integer" maxlength="5">
+		<p></p>
+		<label>Agrega el precio</label>
+		<input type="text" class="decimal-3-places" name="" maxlength="7">
+	</form>
+</body>
+</html>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		validarCualquierNumero()
+	});
+
+	function validarCualquierNumero(){
+		$(".numeric").numeric();
+		$(".integer").numeric(false, function() { alert("Integers only"); this.value = ""; this.focus(); });
+		$(".positive").numeric({ negative: false }, function() { alert("No negative values"); this.value = ""; this.focus(); });
+		$(".positive-integer").numeric({ decimal: false, negative: false }, function() { alert("Positive integers only"); this.value = ""; this.focus(); });
+		$(".decimal-2-places").numeric({ decimalPlaces: 2 });
+		$(".decimal-3-places").numeric({ decimalPlaces: 3 });
+		$("#remove").click(
+			function(e)
+			{
+				e.preventDefault();
+				$(".numeric,.integer,.positive,.positive-integer,.decimal-2-places").removeNumeric();
+			}
+			);
+	}
+</script>
